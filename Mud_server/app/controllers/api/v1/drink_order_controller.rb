@@ -1,4 +1,0 @@
-class DrinkOrderController < ApplicationController
-
-
-end
