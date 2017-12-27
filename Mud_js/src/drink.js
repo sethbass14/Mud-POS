@@ -8,9 +8,18 @@ class Drink {
     Drink.all.push(this)
   }
 
-  render() {
-    return `<div data-id="${this.id}"><li data-id="${this.id}">${this.name}</li></div>`
+  renderName() {
+    return `<div id="drink-name-display"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}">${this.name}</h3></div>`
   }
+
+  renderAll() {
+    return `<div id='drink-show'><ul class="show-list" id='drink-show-list'><li>${this.name}</li><li>${this.description}</li><li>$${this.price}</li></ul></div>`
+  }
+
+  static getDrinkById(id) {
+    return Drink.all.find(drink => drink.id === id)
+  }
+
 }
 
 Drink.all = []

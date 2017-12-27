@@ -1,1 +1,14 @@
 /* CSS Goes Here */
+body {
+  background-color: #F68429;
+  color: #803E0D;
+}
+
+h3:hover {
+  color: black;
+  cursor: pointer
+}
+
+.show-list {
+  text-decoration: none;
+}
