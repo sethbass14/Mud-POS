@@ -54,10 +54,17 @@ function showSpaceHandler(domElement) {
   }
 }
 
-function newDrinkSpaceHandler(domElement) {
+function newDrinkSpaceHandler(domElement, domElement2) {
   return event => {
     event.preventDefault();
-    clearSpace(domElement);
-    renderSpace(domElement, drinkForm )
+    switch(event.target.id) {
+      case 'new-drink':
+        clearSpace(domElement)
+        renderSpace(domElement, drinkForm)
+        break;
+      case 'submit':
+        console.log(2)
+        break;
+    }
   }
 }

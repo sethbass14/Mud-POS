@@ -24,7 +24,8 @@ OrderAdapter.getOrders().then(json => {
 drinkNames.addEventListener('click', nameHandler(showSpace));
 orderClients.addEventListener('click', nameHandler(showSpace));
 showSpace.addEventListener('click', showSpaceHandler(workspace))
-newDrink.addEventListener('click', newDrinkSpaceHandler(newDrinkSpace));
+newDrinkSpace.addEventListener('click', newDrinkSpaceHandler(newDrinkSpace));
+
 
 
 

@@ -17,8 +17,8 @@ class Drink {
   }
 
   renderEditForm() {
-    // return `<form id="edit-drink-form" data-id="${this.id}"><label>Name:  </label><input id='name' type="text" value="${this.name}"></input></br><label>Description:  </label><input id='description' type="text" value="${this.description}"></input></br><label>Price:  </label><input id='price' type="text" value="${this.price}"></input></br><input type='submit' id='submit' value='submit'></input><form>`
-    return `${drinkForm}`
+    return `<form id="edit-drink-form" data-id="${this.id}"><label>Name:  </label><input id='name' type="text" value="${this.name}"></input></br><label>Description:  </label><input id='description' type="text" value="${this.description}"></input></br><label>Price:  </label><input id='price' type="text" value="${this.price}"></input></br><input type='submit' id='submit' value='submit'></input><form>`
+    // return drinkForm
   }
 
   static getDrinkById(id) {
