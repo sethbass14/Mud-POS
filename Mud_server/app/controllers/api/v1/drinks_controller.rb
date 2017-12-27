@@ -12,6 +12,7 @@ class Api::V1::DrinksController < ApplicationController
 
   def create
     @drink = Drink.new(drink_params)
+    byebug
     if @drink.save
       render json: @drink, status: 200
     else
