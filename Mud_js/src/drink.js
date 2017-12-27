@@ -13,7 +13,12 @@ class Drink {
   }
 
   renderAll() {
-    return `<div id='drink-show'><ul class="show-list" id='drink-show-list'><li>${this.name}</li><li>${this.description}</li><li>$${this.price}</li></ul></div>`
+    return `<div id='drink-show'><ul class="show-list" id='drink-show-list'><li>${this.name}</li><li>${this.description}</li><li>$${this.price}</li></ul><button id='edit-drink' data-id="${this.id}">edit</button><button id='delete-drink' data-id="${this.id}">delete</button></div>`
+  }
+
+  renderEditForm() {
+    // return `<form id="edit-drink-form" data-id="${this.id}"><label>Name:  </label><input id='name' type="text" value="${this.name}"></input></br><label>Description:  </label><input id='description' type="text" value="${this.description}"></input></br><label>Price:  </label><input id='price' type="text" value="${this.price}"></input></br><input type='submit' id='submit' value='submit'></input><form>`
+    return `${drinkForm}`
   }
 
   static getDrinkById(id) {
@@ -21,5 +26,7 @@ class Drink {
   }
 
 }
+
+const drinkForm = `<form id="drink-form" data-id="${this.id}"><label>Name:  </label><input id='name' type="text" value="${this.name ? this.name : ''}"></input></br><label>Description:  </label><input id='description' type="text" value="${this.description ? this.description : ''}"></input></br><label>Price:  </label><input id='price' type="text" value="${this.price ? this.price : ''}"></input></br><input type='submit' id='submit' value='submit'></input><form>`
 
 Drink.all = []

@@ -12,8 +12,18 @@ class Order {
   }
 
   renderAll() {
-    return `<div id='order-show'><ul class="show-list" id='order-show-list'><li>${this.client}</li><li>${this.date}</li></ul></div>`
+    return `<div id='order-show'><ul class="show-list" id='order-show-list'><li>${this.client}</li><li>${this.date}</li></ul><button id='edit-order' data-id="${this.id}">edit</button><button id='delete-order' data-id="${this.id}">delete</button></div>`
+  }
+
+  renderEditForm() {
+    return `<form id="edit-order-form" data-id="${this.id}"><label>Client:</label><input id='client' type="text" value="${this.client}"></input></br><label>Date:</label><input id='date' type="text" value="${this.date}"></input></br><input type='submit' id='submit' value='submit'></input><form>`
+  }
+
+  static getOrderById(id) {
+    return Order.all.find(order => order.id === id)
   }
 }
+
+// const orderForm = `<label>Client:</label><input id='client' type="text" value="${this.client}"></input></br><label>Date:</label><input id='date' type="text" value="${this.date}"></input></br>`
 
 Order.all = []
