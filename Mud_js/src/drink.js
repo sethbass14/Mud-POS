@@ -24,6 +24,9 @@ class Drink {
   // setNameId() {
   //   document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${this.id}`
   // }
+  static deleteDrinkMemory(json) {
+    Drink.all = Drink.all.filter(drink => drink.id !== json.id)
+  }
 
   static getDrinkById(id) {
     return Drink.all.find(drink => drink.id === id)

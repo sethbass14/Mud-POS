@@ -54,25 +54,12 @@ function showSpaceHandler(domWorkSpace, domShowSpace) {
 function deleteDrink(id, domShowSpace) {
   document.getElementById(`drink-name-display-${parseInt(id)}`).remove()
   DrinkAdapter.deleteDrink(event.target.dataset.id).then(resp => {
+    Drink.deleteDrinkMemory(resp);
     renderSpace(domShowSpace, `<p>${resp.message}</p>`);
   });
   clearSpace(domShowSpace)
 }
 
-function newDrinkSpaceHandler(domNewDrink, domShow, domDrinkNames) {
-  return event => {
-    event.preventDefault();
-    switch(event.target.id) {
-      case 'new-drink':
-        clearSpace(domNewDrink)
-        renderSpace(domNewDrink, new Drink({}).renderForm())
-        break;
-      case 'submit-drink':
-        makeNewDrink(domShow, domDrinkNames, domNewDrink)
-        break;
-    }
-  }
-}
 
 function workSpaceHandler(domShow) {
   return event => {
@@ -82,7 +69,21 @@ function workSpaceHandler(domShow) {
         editDrink(domShow, event)
     }
   }
+}
 
+function newDrinkSpaceHandler(domNewDrink, domShow, domDrinkNames) {
+  return event => {
+    event.preventDefault();
+    switch(event.target.id) {
+      case 'new-drink':
+      clearSpace(domNewDrink)
+      renderSpace(domNewDrink, new Drink({}).renderForm())
+      break;
+      case 'submit-drink':
+      makeNewDrink(domShow, domDrinkNames, domNewDrink)
+      break;
+    }
+  }
 }
 
 function editDrink(domShow, event) {
@@ -90,7 +91,6 @@ function editDrink(domShow, event) {
   const description = document.getElementById('description').value;
   const price = parseFloat(document.getElementById('price').value);
   const updateDrink = Drink.getDrinkById(parseInt(event.target.parentElement.dataset.id));
-  debugger
   updateDrink.name = name;
   updateDrink.description = description;
   updateDrink.price = price;
@@ -98,6 +98,7 @@ function editDrink(domShow, event) {
   clearSpace(domShow)
   renderSpace(domShow, updateDrink.renderAll())
 }
+
 
 //Reuse this function for updating a drink
 function makeNewDrink(domShow, domDrinkNames, domNewDrink, event) {
