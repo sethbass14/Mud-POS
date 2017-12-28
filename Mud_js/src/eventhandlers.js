@@ -42,7 +42,7 @@ function showSpaceHandler(domWorkSpace, domShowSpace) {
         deleteDrink(id, domShowSpace)
         break;
       case 'edit-order':
-        renderSpace(domWorkSpace, Order.getOrderById(id).renderEditForm())
+        renderSpace(domWorkSpace, Order.getOrderById(id).renderForm())
         break;
       case 'delete-order':
         console.log(4)
