@@ -7,6 +7,7 @@ function nameHandler(domElement) {
     event.preventDefault();
     clearSpace(domElement)
     const id = parseInt(event.target.dataset.id)
+    debugger
     if (event.target.id === 'drink-name') {
       renderSpace(domElement, Drink.getDrinkById(id).renderAll())
     } else if (event.target.id === 'order-name') {
@@ -15,8 +16,11 @@ function nameHandler(domElement) {
   }
 }
 
-function renderSpace(domElement, string) {
-  domElement.innerHTML += string
+function renderSpace(domElement1, string1, domElement2, string2) {
+  domElement1.innerHTML += string1;
+    if (domElement2) {
+      domElement2.innerHTML += string2
+    }
 }
 
 function clearSpace(domElement) {
@@ -38,7 +42,9 @@ function showSpaceHandler(domWorkSpace, domShowSpace) {
         break;
       case 'delete-drink':
         document.getElementById(`drink-name-display-${parseInt(event.target.dataset.id)}`).remove()
-        DrinkAdapter.deleteDrink(event.target.dataset.id).then(resp => renderSpace(domShowSpace, resp.message));
+        DrinkAdapter.deleteDrink(event.target.dataset.id).then(resp => {
+          renderSpace(domShowSpace, `<p>${resp.message}</p>`);
+        });
         clearSpace(domShowSpace)
         // debugger
         break;
@@ -66,11 +72,13 @@ function newDrinkSpaceHandler(domNewDrink, domShow, domDrinkNames) {
         const description = document.getElementById('description').value
         const price = parseFloat(document.getElementById('price').value)
         const newDrink = new Drink({name: name, description: description, price: price })
-        DrinkAdapter.postNewDrink(newDrink).then(drinkObj => { setDataId(drinkObj);
-        setId(drinkObj)})
+        DrinkAdapter.postNewDrink(newDrink).then(drinkObj => {
+           setDataId(drinkObj);
+           setId(drinkObj)
+           new Drink(drinkObj)
+        });
         clearSpace(domShow)
-        renderSpace(domShow, newDrink.renderAll());
-        renderSpace(domDrinkNames, newDrink.renderName());
+        renderSpace(domShow, newDrink.renderAll(), domDrinkNames, newDrink.renderName());
         clearSpace(domNewDrink);
         break;
     }

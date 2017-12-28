@@ -21,6 +21,10 @@ class Drink {
 
   }
 
+  // setNameId() {
+  //   document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${this.id}`
+  // }
+
   static getDrinkById(id) {
     return Drink.all.find(drink => drink.id === id)
   }
