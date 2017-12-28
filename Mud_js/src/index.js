@@ -25,7 +25,7 @@ drinkNames.addEventListener('click', nameHandler(showSpace));
 orderClients.addEventListener('click', nameHandler(showSpace));
 showSpace.addEventListener('click', showSpaceHandler(workSpace, showSpace))
 newDrinkSpace.addEventListener('click', newDrinkSpaceHandler(newDrinkSpace, showSpace, drinkNames));
-
+workSpace.addEventListener('click', workSpaceHandler(showSpace, event))
 
 
 
