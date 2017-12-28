@@ -10,14 +10,14 @@ const newDrinkSpace = document.getElementById('new-drink-space')
 DrinkAdapter.getDrinks().then(json => {
   json.forEach(drinkObj => {
     const newDrink = new Drink(drinkObj);
-    drinkList(newDrink, drinkNames)
+    showList(newDrink, drinkNames)
   })
 });
 
 OrderAdapter.getOrders().then(json => {
   json.forEach(orderObj => {
     const newOrder = new Order(orderObj);
-    orderList(newOrder, orderClients)
+    showList(newOrder, orderClients)
   })
 });
 

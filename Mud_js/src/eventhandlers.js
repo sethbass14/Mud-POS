@@ -1,9 +1,5 @@
-function drinkList(drink, domElement) {
-  domElement.innerHTML += drink.renderName()
-}
-
-function orderList(order, domElement) {
-  domElement.innerHTML += order.renderName()
+function showList(obj, domElement) {
+  domElement.innerHTML += obj.renderName()
 }
 
 function nameHandler(domElement) {
@@ -29,6 +25,7 @@ function clearSpace(domElement) {
   }
 }
 
+
 function showSpaceHandler(domWorkSpace, domShowSpace) {
   return event => {
     event.preventDefault();
@@ -40,9 +37,10 @@ function showSpaceHandler(domWorkSpace, domShowSpace) {
         renderSpace(domWorkSpace, Drink.getDrinkById(id).renderForm())
         break;
       case 'delete-drink':
-        console.log(2)
+        document.getElementById(`drink-name-display-${parseInt(event.target.dataset.id)}`).remove()
         DrinkAdapter.deleteDrink(event.target.dataset.id).then(resp => renderSpace(domShowSpace, resp.message));
         clearSpace(domShowSpace)
+        // debugger
         break;
       case 'edit-order':
         console.log(3)
@@ -68,7 +66,9 @@ function newDrinkSpaceHandler(domNewDrink, domShow, domDrinkNames) {
         const description = document.getElementById('description').value
         const price = parseFloat(document.getElementById('price').value)
         const newDrink = new Drink({name: name, description: description, price: price })
-        DrinkAdapter.postNewDrink(newDrink).then(drinkObj => setDataId(drinkObj));
+        DrinkAdapter.postNewDrink(newDrink).then(drinkObj => { setDataId(drinkObj);
+        setId(drinkObj)})
+        clearSpace(domShow)
         renderSpace(domShow, newDrink.renderAll());
         renderSpace(domDrinkNames, newDrink.renderName());
         clearSpace(domNewDrink);
@@ -77,6 +77,10 @@ function newDrinkSpaceHandler(domNewDrink, domShow, domDrinkNames) {
   }
 }
 
-function setDataId(drinkObj) {
-  document.querySelectorAll('[data-id=undefined]').forEach(element => element.dataset.id = drinkObj.id)
+function setDataId(obj) {
+  document.querySelectorAll('[data-id=undefined]').forEach(element => element.dataset.id = obj.id)
+}
+
+function setId(drinkObj) {
+  document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${drinkObj.id}`
 }

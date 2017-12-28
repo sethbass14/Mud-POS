@@ -9,7 +9,7 @@ class Drink {
   }
 
   renderName() {
-    return `<div id="drink-name-display"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}">${this.name}</h3></div>`
+    return `<div id="drink-name-display-${this.id}"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}">${this.name}</h3></div>`
   }
 
   renderAll() {
