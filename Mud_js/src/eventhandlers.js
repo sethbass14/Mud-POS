@@ -20,7 +20,6 @@ function nameHandler(domElement) {
 }
 
 function renderSpace(domElement, string) {
-  console.log(string)
   domElement.innerHTML += string
 }
 
@@ -30,22 +29,24 @@ function clearSpace(domElement) {
   }
 }
 
-function showSpaceHandler(domElement) {
+function showSpaceHandler(domWorkSpace, domShowSpace) {
   return event => {
     event.preventDefault();
-    clearSpace(domElement);
+    clearSpace(domWorkSpace);
     const id = parseInt(event.target.dataset.id)
     switch(event.target.id) {
       case 'edit-drink':
         console.log(1)
-        renderSpace(domElement, Drink.getDrinkById(id).renderForm())
+        renderSpace(domWorkSpace, Drink.getDrinkById(id).renderForm())
         break;
       case 'delete-drink':
         console.log(2)
+        DrinkAdapter.deleteDrink(event.target.dataset.id).then(resp => renderSpace(domShowSpace, resp.message));
+        clearSpace(domShowSpace)
         break;
       case 'edit-order':
         console.log(3)
-        renderSpace(domElement, Order.getOrderById(id).renderEditForm())
+        renderSpace(domWorkSpace, Order.getOrderById(id).renderEditForm())
         break;
       case 'delete-order':
         console.log(4)
@@ -54,23 +55,28 @@ function showSpaceHandler(domElement) {
   }
 }
 
-function newDrinkSpaceHandler(domElement, domElement2) {
+function newDrinkSpaceHandler(domNewDrink, domShow, domDrinkNames) {
   return event => {
     event.preventDefault();
-    console.log(event.target)
     switch(event.target.id) {
       case 'new-drink':
-        clearSpace(domElement)
-        renderSpace(domElement, new Drink({}).renderForm())
+        clearSpace(domNewDrink)
+        renderSpace(domNewDrink, new Drink({}).renderForm())
         break;
       case 'submit':
-        console.log(1)
         const name = document.getElementById('name').value
         const description = document.getElementById('description').value
         const price = parseFloat(document.getElementById('price').value)
-        // console.log({name: name, description: description, price: price })
-        DrinkAdapter.postNewDrink({name: name, description: description, price: price })
+        const newDrink = new Drink({name: name, description: description, price: price })
+        DrinkAdapter.postNewDrink(newDrink).then(drinkObj => setDataId(drinkObj));
+        renderSpace(domShow, newDrink.renderAll());
+        renderSpace(domDrinkNames, newDrink.renderName());
+        clearSpace(domNewDrink);
         break;
     }
   }
+}
+
+function setDataId(drinkObj) {
+  document.querySelectorAll('[data-id=undefined]').forEach(element => element.dataset.id = drinkObj.id)
 }

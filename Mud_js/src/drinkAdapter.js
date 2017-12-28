@@ -13,4 +13,10 @@ class DrinkAdapter {
       body: JSON.stringify(drinkObj)
     }).then(resp => resp.json())
   }
+
+  static deleteDrink(id) {
+    return fetch(`http://localhost:3000/api/v1/drinks/${id}`, {
+      method: 'DELETE'
+    }).then(resp => resp.json())
+  }
 }

@@ -12,7 +12,6 @@ class Api::V1::DrinksController < ApplicationController
 
   def create
     @drink = Drink.new(drink_params)
-    byebug
     if @drink.save
       render json: @drink, status: 200
     else
@@ -30,13 +29,14 @@ class Api::V1::DrinksController < ApplicationController
   end
 
   def destroy
+    @drink = Drink.find(params[:id])
     @drink.destroy
     render json: {message: "Zap!, drink deleted!", id: @drink.id}
   end
 
   private
 
-  def drinks_params
+  def drink_params
     params.permit(:name, :description, :price)
   end
 end
