@@ -14,6 +14,17 @@ class DrinkAdapter {
     }).then(resp => resp.json())
   }
 
+  static postEditDrink(drinkObj) {
+    return fetch(`http://localhost:3000/api/v1/drinks/${drinkObj.id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify(drinkObj)
+    }).then(resp => resp.json())
+  }
+
   static deleteDrink(id) {
     return fetch(`http://localhost:3000/api/v1/drinks/${id}`, {
       method: 'DELETE'
