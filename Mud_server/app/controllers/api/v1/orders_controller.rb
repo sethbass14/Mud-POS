@@ -29,8 +29,9 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def destroy
+    @order = Order.find(params[:id])
     @order.destroy
-    redner json: {message: "Zap! Order destroye!", id: @order.id}
+    render json: {message: "Zap! Order destroyed!", id: @order.id}
   end
 
   private

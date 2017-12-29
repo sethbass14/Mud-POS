@@ -21,3 +21,12 @@ function editOrder(client, date, domShow) {
   OrderAdapter.postEditOrder(updateOrder)
   return updateOrder
 }
+
+function deleteOrder(id, domShowSpace) {
+  document.getElementById(`order-name-display-${parseInt(id)}`).remove()
+  OrderAdapter.deleteOrder(event.target.dataset.id).then(resp => {
+    Order.deleteOrderMemory(resp);
+    renderSpace(domShowSpace, `<p>${resp.message}</p>`);
+  });
+  clearSpace(domShowSpace)
+}

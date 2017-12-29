@@ -25,4 +25,10 @@ class OrderAdapter {
     }).then(resp => resp.json())
   }
 
+  static deleteOrder(id) {
+    return fetch(`http://localhost:3000/api/v1/orders/${id}`, {
+      method: 'DELETE'
+    }).then(resp => resp.json())
+  }
+
 }

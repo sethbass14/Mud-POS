@@ -26,8 +26,10 @@ class Order {
   static getOrderById(id) {
     return Order.all.find(order => order.id === id)
   }
-}
 
-// const orderForm = `<label>Client:</label><input id='client' type="text" value="${this.client}"></input></br><label>Date:</label><input id='date' type="text" value="${this.date}"></input></br>`
+  static deleteOrderMemory(json) {
+    Order.all = Order.all.filter(order => order.id !== json.id)
+  }
+}
 
 Order.all = []

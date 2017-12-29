@@ -43,6 +43,7 @@ function showSpaceHandler(domWorkSpace, domShowSpace) {
         renderSpace(domWorkSpace, Order.getOrderById(id).renderForm())
         break;
       case 'delete-order':
+        deleteOrder(id, domShowSpace)
         console.log(4)
         break;
     }
