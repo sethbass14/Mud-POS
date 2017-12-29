@@ -27,24 +27,27 @@ function clearSpace(domElement) {
   }
 }
 
-
-function showSpaceHandler(domWorkSpace, domShowSpace) {
+// refactor this below
+function showSpaceHandler(domWorkSpace, domShowSpace, ) {
   return event => {
     event.preventDefault();
     const id = parseInt(event.target.dataset.id)
     switch(event.target.id) {
       case 'edit-drink':
+        clearSpace(domWorkSpace)
         renderSpace(domWorkSpace, Drink.getDrinkById(id).renderForm())
         break;
       case 'delete-drink':
+        clearSpace(domWorkSpace)
         deleteDrink(id, domShowSpace)
         break;
       case 'edit-order':
+        clearSpace(domWorkSpace)
         renderSpace(domWorkSpace, Order.getOrderById(id).renderForm())
         break;
       case 'delete-order':
+        clearSpace(domWorkSpace)
         deleteOrder(id, domShowSpace)
-        console.log(4)
         break;
     }
   }
@@ -55,11 +58,9 @@ function newFormHandler(domWorkSpace, domShow) {
   return event => {
     event.preventDefault();
     clearSpace(domWorkSpace)
-    switch(event.target.id) {
-      case 'new-drink':
-      renderSpace(domWorkSpace, new Drink({}).renderForm())
-      break;
-      case 'new-order':
+    if (event.target.id === 'new-drink') {
+        renderSpace(domWorkSpace, new Drink({}).renderForm())
+    } else if (event.target.id === 'new-order') {
       renderSpace(domWorkSpace, new Order({}).renderForm())
     }
   }
@@ -67,21 +68,22 @@ function newFormHandler(domWorkSpace, domShow) {
 
 function workSpaceHandler(domShow, workSpace, domDrinkNames, domOrderClients) {
   return event => {
-    console.log(event.target)
-    console.log(event.target.dataset.id)
     event.preventDefault();
-    switch(event.target.dataset.id) {
-      case 'drink':
-        drinkFormHandler(domShow, domDrinkNames);
-        break;
-      case 'order':
-        orderFormHandler(domShow, domOrderClients)
+    let model
+    if (event.target.dataset.id === 'drink') {
+      model = drinkFormHandler(domShow, domDrinkNames)
+      console.log(model)
+    } else if (event.target.dataset.id === 'order') {
+      model = orderFormHandler(domShow, domOrderClients)
     }
     if (event.target.type === 'submit') {
-      clearSpace(workSpace)
+       clearSpace(workSpace)
+       clearSpace(domShow);
+       renderSpace(domShow, model.renderAll())
     }
   }
 }
+
 
 function drinkFormHandler(domShow, domDrinkNames) {
   const name = document.getElementById('name').value;
@@ -93,10 +95,8 @@ function drinkFormHandler(domShow, domDrinkNames) {
     renderSpace(domDrinkNames, drink.renderName());
   } else if (event.target.id === 'submit-edit-drink') {
     drink = editDrink(name, description, price)
-    drink.editName()
   }
-  clearSpace(domShow)
-  renderSpace(domShow, drink.renderAll())
+  return drink
 }
 
 function orderFormHandler(domShow, domOrderClients) {
@@ -108,16 +108,10 @@ function orderFormHandler(domShow, domOrderClients) {
     renderSpace(domOrderClients, order.renderName())
   } else if (event.target.id === 'submit-edit-order') {
     order = editOrder(client, date);
-    order.editName()
   }
-  clearSpace(domShow);
-  renderSpace(domShow, order.renderAll())
+  return order
 }
 
 function setDataId(obj) {
   document.querySelectorAll('[data-id=undefined]').forEach(element => element.dataset.id = obj.id)
 }
-
-// function setDrinkId(drinkObj) {
-//   document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${drinkObj.id}`
-// }

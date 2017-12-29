@@ -19,6 +19,7 @@ function editOrder(client, date, domShow) {
   updateOrder.client = client;
   updateOrder.date = date;
   OrderAdapter.postEditOrder(updateOrder)
+  updateOrder.editName()
   return updateOrder
 }
 

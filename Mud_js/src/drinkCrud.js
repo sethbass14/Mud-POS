@@ -27,5 +27,6 @@ function editDrink(name, description, price) {
   updateDrink.description = description;
   updateDrink.price = price;
   DrinkAdapter.postEditDrink(updateDrink)
+  updateDrink.editName()
   return updateDrink
 }
