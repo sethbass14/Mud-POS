@@ -61,12 +61,13 @@ function deleteDrink(id, domShowSpace) {
 }
 
 
-function workSpaceHandler(domShow) {
+function workSpaceHandler(domShow, workSpace) {
   return event => {
     event.preventDefault();
     switch(event.target.id) {
       case 'submit-drink':
-        editDrink(domShow, event)
+        editDrink(domShow, event);
+        clearSpace(workSpace)
     }
   }
 }
