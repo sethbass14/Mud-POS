@@ -9,7 +9,7 @@ class Drink {
   }
 
   renderName() {
-    return `<div id="drink-name-display-${this.id}"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}">${this.name}</h3></div>`
+    return `<div id="drink-name-display-${this.id}"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}" data-name="Drink">${this.name}</h3></div>`
   }
 
   renderAll() {
@@ -25,9 +25,6 @@ class Drink {
     document.getElementById(`drink-name-display-${this.id}`).innerHTML = `<h3 id="drink-name" data-id="${this.id}">${this.name}</h3>`
   }
 
-  // setNameId() {
-  //   document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${this.id}`
-  // }
   static deleteDrinkMemory(json) {
     Drink.all = Drink.all.filter(drink => drink.id !== json.id)
   }

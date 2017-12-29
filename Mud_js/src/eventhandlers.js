@@ -6,26 +6,20 @@ function nameHandler(domElement) {
   return event => {
     event.preventDefault();
     clearSpace(domElement)
+    let string
     const id = parseInt(event.target.dataset.id)
     if (event.target.id === 'drink-name') {
-      renderSpace(domElement, Drink.getDrinkById(id).renderAll())
+      string = Drink.getDrinkById(id).renderAll()
     } else if (event.target.id === 'order-name') {
-      renderSpace(domElement, Order.getOrderById(id).renderAll())
+      string = Order.getOrderById(id).renderAll()
     }
+    renderSpace(domElement, string)
   }
 }
-
-// function renderSpace(domElement1, string1, domElement2, string2) {
-//   domElement1.innerHTML += string1;
-//     if (domElement2) {
-//       domElement2.innerHTML += string2
-//     }
-// }
 
 function renderSpace(domElement, string) {
   domElement.innerHTML += string;
 }
-
 
 function clearSpace(domElement) {
   if (domElement.children.length > 1) {
