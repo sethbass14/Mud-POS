@@ -82,12 +82,15 @@ function newFormHandler(domWorkSpace, domShow) {
 
 function workSpaceHandler(domShow, workSpace, domNames) {
   return event => {
-    console.log(event.target.type)
+    console.log(event.target)
+    console.log(event.target.dataset.id)
     event.preventDefault();
     switch(event.target.dataset.id) {
       case 'drink':
       drinkFormHandler(domShow, domNames);
+      break;
       case 'order':
+      console.log(1)
       orderFormHandler(domShow, domNames)
     }
     if (event.target.type === 'submit') {
