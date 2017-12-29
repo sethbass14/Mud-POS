@@ -15,12 +15,17 @@ function nameHandler(domElement) {
   }
 }
 
-function renderSpace(domElement1, string1, domElement2, string2) {
-  domElement1.innerHTML += string1;
-    if (domElement2) {
-      domElement2.innerHTML += string2
-    }
+// function renderSpace(domElement1, string1, domElement2, string2) {
+//   domElement1.innerHTML += string1;
+//     if (domElement2) {
+//       domElement2.innerHTML += string2
+//     }
+// }
+
+function renderSpace(domElement, string) {
+  domElement.innerHTML += string;
 }
+
 
 function clearSpace(domElement) {
   if (domElement.children.length > 1) {
@@ -32,8 +37,8 @@ function clearSpace(domElement) {
 function showSpaceHandler(domWorkSpace, domShowSpace) {
   return event => {
     event.preventDefault();
-    // clearSpace(domWorkSpace);
     const id = parseInt(event.target.dataset.id)
+    let string
     switch(event.target.id) {
       case 'edit-drink':
         renderSpace(domWorkSpace, Drink.getDrinkById(id).renderForm())
@@ -96,9 +101,7 @@ function newDrink(name, description, price, domShow, domDrinkNames) {
      setId(drinkObj)
      new Drink(drinkObj)
   });
-  clearSpace(domShow)
-  //maybe abstract this below to another function
-  renderSpace(domShow, newDrink.renderAll(), domDrinkNames, newDrink.renderName());
+  return newDrink
 }
 
 function editDrink(name, description, price, domShow) {
@@ -107,21 +110,24 @@ function editDrink(name, description, price, domShow) {
   updateDrink.description = description;
   updateDrink.price = price;
   DrinkAdapter.postEditDrink(updateDrink)
-  clearSpace(domShow)
-  renderSpace(domShow, updateDrink.renderAll())
+  return updateDrink
 }
 
-//Reuse this function for updating a drink
+
 function drinkFormHandler(domShow, domDrinkNames) {
   const name = document.getElementById('name').value;
   const description = document.getElementById('description').value;
   const price = parseFloat(document.getElementById('price').value);
+  let drink
   if (event.target.id === 'submit-new-drink') {
-    newDrink(name, description, price, domShow, domDrinkNames)
+    drink = newDrink(name, description, price, domShow, domDrinkNames)
+    renderSpace(domDrinkNames, drink.renderName());
   } else if (event.target.id === 'submit-edit-drink') {
-    console.log(event.target.id)
-    editDrink(name, description, price, domShow)
+    drink = editDrink(name, description, price)
+    drink.editName()
   }
+  clearSpace(domShow)
+  renderSpace(domShow, drink.renderAll())
 }
 
 function setDataId(obj) {

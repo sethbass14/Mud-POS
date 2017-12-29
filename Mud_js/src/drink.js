@@ -21,6 +21,10 @@ class Drink {
 
   }
 
+  editName() {
+    document.getElementById(`drink-name-display-${this.id}`).innerHTML = `<h3 id="drink-name" data-id="${this.id}">${this.name}</h3>`
+  }
+
   // setNameId() {
   //   document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${this.id}`
   // }
