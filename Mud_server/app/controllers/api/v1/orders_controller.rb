@@ -36,7 +36,7 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:client, :date, :drink_ids)
+    params.permit(:client, :date)
   end
 
 end

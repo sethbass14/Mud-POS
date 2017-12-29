@@ -64,34 +64,17 @@ function newFormHandler(domWorkSpace, domShow) {
   }
 }
 
-// function workSpaceHandler(domShow, workSpace, domNames) {
-//   return event => {
-//     console.log(event.target.type)
-//     event.preventDefault();
-//     switch(event.target.id) {
-//       case 'submit-edit-drink':
-//       drinkFormHandler(domShow);
-//       case 'submit-new-drink':
-//       drinkFormHandler(domShow, domNames);
-//     }
-//     if (event.target.type === 'submit') {
-//       clearSpace(workSpace)
-//     }
-//   }
-// }
-
-function workSpaceHandler(domShow, workSpace, domNames) {
+function workSpaceHandler(domShow, workSpace, domDrinkNames, domOrderClients) {
   return event => {
     console.log(event.target)
     console.log(event.target.dataset.id)
     event.preventDefault();
     switch(event.target.dataset.id) {
       case 'drink':
-      drinkFormHandler(domShow, domNames);
-      break;
+        drinkFormHandler(domShow, domDrinkNames);
+        break;
       case 'order':
-      console.log(1)
-      orderFormHandler(domShow, domNames)
+        orderFormHandler(domShow, domOrderClients)
     }
     if (event.target.type === 'submit') {
       clearSpace(workSpace)
@@ -121,8 +104,12 @@ function orderFormHandler(domShow, domOrderClients) {
   let order
   if (event.target.id === 'submit-new-order') {
     order = newOrder(client, date)
+    console.log(domOrderClients)
+    debugger
     renderSpace(domOrderClients, order.renderName())
   }
+  clearSpace(domShow);
+  renderSpace(domShow, order.renderAll())
 }
 
 function setDataId(obj) {

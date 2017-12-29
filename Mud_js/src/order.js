@@ -8,7 +8,7 @@ class Order {
   }
 
   renderName() {
-    return `<div id="order-name-display"data-id="${this.id}"><h3 id="order-name" data-id="${this.id}">${this.client}</h3></div>`
+    return `<div id="order-name-display-${this.id}"data-id="${this.id}"><h3 id="order-name" data-id="${this.id}">${this.client}</h3></div>`
   }
 
   renderAll() {

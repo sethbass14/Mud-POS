@@ -27,7 +27,7 @@ showSpace.addEventListener('click', showSpaceHandler(workSpace, showSpace))
 // newDrinkSpace.addEventListener('click', newDrinkSpaceHandler(newDrinkSpace, showSpace, drinkNames));
 newDrink.addEventListener('click', newFormHandler(workSpace, showSpace, drinkNames));
 newOrder.addEventListener('click', newFormHandler(workspace, showSpace, orderClients));
-workSpace.addEventListener('click', workSpaceHandler(showSpace, workSpace, drinkNames))
+workSpace.addEventListener('click', workSpaceHandler(showSpace, workSpace, drinkNames, orderClients))
 
 
 
