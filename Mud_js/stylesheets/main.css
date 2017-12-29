@@ -4,7 +4,7 @@ body {
   color: #803E0D;
 }
 
-h3:hover, #new-drink:hover {
+h3:hover, #new-drink:hover, #new-order:hover {
   color: black;
   cursor: pointer
 }

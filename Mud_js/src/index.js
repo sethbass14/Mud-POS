@@ -5,8 +5,7 @@ const showSpace = document.getElementById('showspace')
 const orderClients = document.getElementById('order-clients')
 const workSpace = document.getElementById('workspace')
 const newDrink = document.getElementById('new-drink')
-const newDrink = document.getElementById('new-drink')
-const newOrderSpace = document.getElementById('new-order')
+const newOrder = document.getElementById('new-order')
 
 DrinkAdapter.getDrinks().then(json => {
   json.forEach(drinkObj => {
@@ -26,8 +25,8 @@ drinkNames.addEventListener('click', nameHandler(showSpace));
 orderClients.addEventListener('click', nameHandler(showSpace));
 showSpace.addEventListener('click', showSpaceHandler(workSpace, showSpace))
 // newDrinkSpace.addEventListener('click', newDrinkSpaceHandler(newDrinkSpace, showSpace, drinkNames));
-newDrink.addEventListener('click', formHandler(workSpace, showSpace, drinkNames));
-newOrder.addEventListener('click', formHandler(workSpace, showSpace, orderClients))
+newDrink.addEventListener('click', newFormHandler(workSpace, showSpace, drinkNames));
+newOrder.addEventListener('click', newFormHandler(workspace, showSpace, orderClients));
 workSpace.addEventListener('click', workSpaceHandler(showSpace, workSpace, drinkNames))
 
 

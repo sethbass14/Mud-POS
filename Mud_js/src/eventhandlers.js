@@ -49,30 +49,49 @@ function showSpaceHandler(domWorkSpace, domShowSpace) {
   }
 }
 
-function workSpaceHandler(domShow, workSpace, domDrinkNames) {
+
+function newFormHandler(domWorkSpace, domShow) {
   return event => {
-    console.log(event.target.type)
     event.preventDefault();
+    clearSpace(domWorkSpace)
     switch(event.target.id) {
-      case 'submit-edit-drink':
-        drinkFormHandler(domShow);
-      case 'submit-new-drink':
-        drinkFormHandler(domShow, domDrinkNames);
-    }
-    if (event.target.type === 'submit') {
-      clearSpace(workSpace)
+      case 'new-drink':
+      renderSpace(domWorkSpace, new Drink({}).renderForm())
+      break;
+      case 'new-order':
+      renderSpace(domWorkSpace, new Order({}).renderForm())
     }
   }
 }
 
-function formHandler(domWorkSpace, domShow) {
+// function workSpaceHandler(domShow, workSpace, domNames) {
+//   return event => {
+//     console.log(event.target.type)
+//     event.preventDefault();
+//     switch(event.target.id) {
+//       case 'submit-edit-drink':
+//       drinkFormHandler(domShow);
+//       case 'submit-new-drink':
+//       drinkFormHandler(domShow, domNames);
+//     }
+//     if (event.target.type === 'submit') {
+//       clearSpace(workSpace)
+//     }
+//   }
+// }
+
+function workSpaceHandler(domShow, workSpace, domNames) {
   return event => {
+    console.log(event.target.type)
     event.preventDefault();
-    switch(event.target.id) {
-      case 'new-drink':
-      clearSpace(domWorkSpace)
-      renderSpace(domWorkSpace, new Drink({}).renderForm())
-      break;
+    switch(event.target.dataset.id) {
+      case 'drink':
+      drinkFormHandler(domShow, domNames);
+      case 'order':
+      orderFormHandler(domShow, domNames)
+    }
+    if (event.target.type === 'submit') {
+      clearSpace(workSpace)
     }
   }
 }
@@ -93,10 +112,20 @@ function drinkFormHandler(domShow, domDrinkNames) {
   renderSpace(domShow, drink.renderAll())
 }
 
+function orderFormHandler(domShow, domOrderClients) {
+  const client = document.getElementById('client').value
+  const date = document.getElementById('date').value
+  let order
+  if (event.target.id === 'submit-new-order') {
+    order = newOrder(client, date)
+    renderSpace(domOrderClients, order.renderName())
+  }
+}
+
 function setDataId(obj) {
   document.querySelectorAll('[data-id=undefined]').forEach(element => element.dataset.id = obj.id)
 }
 
-function setId(drinkObj) {
-  document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${drinkObj.id}`
-}
+// function setDrinkId(drinkObj) {
+//   document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${drinkObj.id}`
+// }

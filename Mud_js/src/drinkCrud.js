@@ -7,11 +7,15 @@ function deleteDrink(id, domShowSpace) {
   clearSpace(domShowSpace)
 }
 
-function newDrink(name, description, price, domShow, domDrinkNames) {
+function setDrinkId(drinkObj) {
+  document.getElementById(`drink-name-display-undefined`).id = `drink-name-display-${drinkObj.id}`
+}
+
+function newDrink(name, description, price) {
   const newDrink = new Drink({name: name, description: description, price: price});
   DrinkAdapter.postNewDrink(newDrink).then(drinkObj => {
      setDataId(drinkObj);
-     setId(drinkObj)
+     setDrinkId(drinkObj)
      new Drink(drinkObj)
   });
   return newDrink

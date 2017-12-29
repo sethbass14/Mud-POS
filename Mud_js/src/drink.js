@@ -17,7 +17,7 @@ class Drink {
   }
 
   renderForm() {
-    return `<form id="drink-form" data-id="${this.id}"><label>Name:  </label><input id='name' type="text" value="${this.name ? this.name : ''}"></input></br><label>Description:  </label><input id='description' type="text" value="${this.description ? this.description : ''}"></input></br><label>Price:  </label><input id='price' type="text" value="${this.price ? this.price : ''}"></input></br><input type='submit' id=${this.name? "submit-edit-drink" : "submit-new-drink"} value='submit'></input><form>`
+    return `<form id="drink-form" data-id="${this.id}"><label>Name:  </label><input id='name' type="text" value="${this.name ? this.name : ''}"></input></br><label>Description:  </label><input id='description' type="text" value="${this.description ? this.description : ''}"></input></br><label>Price:  </label><input id='price' type="text" value="${this.price ? this.price : ''}"></input></br><input type='submit' id=${this.name? "submit-edit-drink" : "submit-new-drink"} data-id="drink"value='submit'></input><form>`
 
   }
 
