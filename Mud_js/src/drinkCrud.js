@@ -21,7 +21,7 @@ function newDrink(name, description, price) {
   return newDrink
 }
 
-function editDrink(name, description, price, domShow) {
+function editDrink(name, description, price) {
   const updateDrink = Drink.getDrinkById(parseInt(event.target.parentElement.dataset.id));
   updateDrink.name = name;
   updateDrink.description = description;

@@ -104,9 +104,10 @@ function orderFormHandler(domShow, domOrderClients) {
   let order
   if (event.target.id === 'submit-new-order') {
     order = newOrder(client, date)
-    console.log(domOrderClients)
-    debugger
     renderSpace(domOrderClients, order.renderName())
+  } else if (event.target.id === 'submit-edit-order') {
+    order = editOrder(client, date);
+    order.editName()
   }
   clearSpace(domShow);
   renderSpace(domShow, order.renderAll())

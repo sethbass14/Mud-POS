@@ -13,3 +13,11 @@ function newOrder(client, date) {
   });
   return newOrder
 }
+
+function editOrder(client, date, domShow) {
+  const updateOrder = Order.getOrderById(parseInt(event.target.parentElement.dataset.id));
+  updateOrder.client = client;
+  updateOrder.date = date;
+  OrderAdapter.postEditOrder(updateOrder)
+  return updateOrder
+}

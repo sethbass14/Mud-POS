@@ -19,6 +19,10 @@ class Order {
     return `<form id="edit-order-form" data-id="${this.id ? this.id : ''}"><label>Client:</label><input id='client' type="text" value="${this.client ? this.client : ''}"></input></br><label>Date:</label><input id='date' type="text" value="${this.date ? this.date : ''}"></input></br><input type='submit' id="${this.id ? 'submit-edit-order': 'submit-new-order'}" data-id="order" value='submit'></input><form>`
   }
 
+  editName() {
+    document.getElementById(`order-name-display-${this.id}`).innerHTML = `<h3 id="order-name" data-id="${this.id}">${this.client}</h3>`
+  }
+
   static getOrderById(id) {
     return Order.all.find(order => order.id === id)
   }
