@@ -12,6 +12,10 @@ class Drink {
     return `<div id="drink-name-display-${this.id}"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}" data-name="Drink">${this.name}</h3></div>`
   }
 
+  renderNameOrder() {
+    return `<li>${this.name} | $${this.price} </li>`
+  }
+
   renderAll() {
     return `<div id='drink-show'><ul class="show-list" id='drink-show-list'><li>${this.name}</li><li>${this.description}</li><li>$${this.price}</li></ul><button id='edit-drink' data-id="${this.id}">edit</button><button id='delete-drink' data-id="${this.id}">delete</button></div>`
   }

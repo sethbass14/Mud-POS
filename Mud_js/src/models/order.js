@@ -4,6 +4,7 @@ class Order {
     this.client = orderObj.client,
     this.date = orderObj.date,
     this.drinks = orderObj.drinks,
+    this.drink_ids = orderObj.drink_ids
     this.drink_orders = orderObj.drink_orders.map(drinkOrderObj => new DrinkOrder(drinkOrderObj)),
     Order.all.push(this)
   }
@@ -12,8 +13,16 @@ class Order {
     return `<div id="order-name-display-${this.id}"data-id="${this.id}"><h3 id="order-name" data-id="${this.id}">${this.client}</h3></div>`
   }
 
+  renderDrinkOrders() {
+    return this.drink_orders.map(drink_order => drink_order.render()).join('')
+  }
+
+  renderDrinkOrderTotal() {
+    return this.drink_orders.length ? this.renderDrinkOrders() + `<li>Total | $` + this.totalCost()+ `</li>` : `<li>click edit to add drinks to this order</li>`
+  }
+
   renderAll() {
-    return `<div id='order-show'><ul class="show-list" id='order-show-list'><li>${this.client}</li><li>${this.date}</li></ul><button id='edit-order' data-id="${this.id}">edit</button><button id='delete-order' data-id="${this.id}">delete</button></div>`
+    return `<div id='order-show'><ul class="show-list" id='order-show-list'><li>${this.client}</li><li>${this.date}</li><ul>${this.renderDrinkOrderTotal()}</ul></ul><button id='edit-order' data-id="${this.id}">edit</button><button id='delete-order' data-id="${this.id}">delete</button></div>`
   }
 
   totalCost() {

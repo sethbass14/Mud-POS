@@ -6,6 +6,10 @@ class DrinkOrder {
     this.quantity = drinkOrderObj.quantity,
     DrinkOrder.all.push(this)
   }
+
+  render() {
+    return `<li>${Drink.getDrinkById(this.drink_id).name} | $${Drink.getDrinkById(this.drink_id).price} | order: ${this.quantity}</li>`
+  }
 }
 
 DrinkOrder.all = []
