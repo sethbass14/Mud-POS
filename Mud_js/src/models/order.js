@@ -4,6 +4,7 @@ class Order {
     this.client = orderObj.client,
     this.date = orderObj.date,
     this.drinks = orderObj.drinks,
+    this.drink_orders = orderObj.drink_orders.map(drinkOrderObj => new DrinkOrder(drinkOrderObj)),
     Order.all.push(this)
   }
 
@@ -13,6 +14,14 @@ class Order {
 
   renderAll() {
     return `<div id='order-show'><ul class="show-list" id='order-show-list'><li>${this.client}</li><li>${this.date}</li></ul><button id='edit-order' data-id="${this.id}">edit</button><button id='delete-order' data-id="${this.id}">delete</button></div>`
+  }
+
+  totalCost() {
+    return this.drink_orders.map(drink_order => {
+      return Drink.getDrinkById(drink_order.drink_id).price * drink_order.quantity
+    }).reduce(function (a, b) {
+      return a + b
+    })
   }
 
   renderForm() {
