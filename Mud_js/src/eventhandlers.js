@@ -83,6 +83,7 @@ function workSpaceHandler(domShow, workSpace, domDrinkNames, domOrderClients) {
     if (event.target.type === 'submit') {
        clearSpace(workSpace)
        clearSpace(domShow);
+
        renderSpace(domShow, model.renderAll())
     }
   }
@@ -121,30 +122,10 @@ function orderFormHandler(domShow, domOrderClients) {
   return order
 }
 
-// function drinkOrderCheck() {
-//   const arr = [...document.getElementsByClassName('order-drink')]
-//   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
-//   arr.forEach(element => {
-//     if (parseInt(element.value) > 0) {
-//       if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
-//          const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
-//          drinkOrder.quantity = parseInt(element.value)
-//          debugger
-//          DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
-//       } else {
-//         const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: parseInt(element.dataset.id), quantity: parseInt(element.value)})
-//         Order.getOrderById(orderId).drink_orders.push(newDrinkOrder)
-//         DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder)
-//       }
-//     }
-//   })
-// }
-
 function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
   arr.forEach(element => {
-      // debugger
       if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
         const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
         if (parseInt(element.value) > 0 && drinkOrder.quantity !== parseInt(element.value)) {

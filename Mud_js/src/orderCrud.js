@@ -4,7 +4,7 @@ function setOrderId(orderObj) {
 }
 
 function newOrder(client, date) {
-  const newOrder = new Order({client: client, date: date});
+  const newOrder = new Order({client: client, date: date, drink_orders: []});
   console.log(newOrder)
   OrderAdapter.postNewOrder(newOrder).then(OrderObj => {
      setDataId(OrderObj);
