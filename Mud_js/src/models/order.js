@@ -15,9 +15,9 @@ class Order {
     return this.drink_orders.map(drink_order => drink_order.render()).join('')
   }
 
-  renderDrinkOrdersForm() {
-    
-  }
+  // renderDrinkOrdersForm() {
+  //
+  // }
 
   renderDrinkOrderTotal() {
     return this.drink_orders.length ? this.renderDrinkOrders() + `<li>Total | $` + this.totalCost()+ `</li>` : `<li>click edit to add drinks to this order</li>`
