@@ -21,6 +21,7 @@ class Api::V1::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+    byebug
     if @order.update(order_params)
       render json: @order, status: 200
     else
@@ -37,7 +38,7 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:client, :date, drink_orders: [])
+    params.permit(:client, :date)
   end
 
 end

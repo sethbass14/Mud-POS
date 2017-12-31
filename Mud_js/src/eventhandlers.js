@@ -13,7 +13,9 @@ function nameHandler(domElement) {
     } else if (event.target.id === 'order-name') {
       string = Order.getOrderById(id).renderAll()
     }
-    renderSpace(domElement, string)
+    if (string) {
+      renderSpace(domElement, string)
+    }
   }
 }
 
