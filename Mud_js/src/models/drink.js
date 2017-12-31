@@ -9,11 +9,15 @@ class Drink {
   }
 
   renderName() {
-    return `<div id="drink-name-display-${this.id}"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}" data-name="Drink">${this.name}</h3></div>`
+    return `<div id="drink-name-display-${this.id}" class="drink-name"data-id="${this.id}"><h3 id="drink-name" data-id="${this.id}" data-name="Drink">${this.name}</h3></div>`
   }
 
   renderNameOrder() {
     return `<li>${this.name} | $${this.price} </li>`
+  }
+
+  renderDrinkOrderDisplay() {
+    return `<label>${this.name} | $${this.price}</label><input type="text" data-id=${this.id} value="0"></input></br>`
   }
 
   renderAll() {
@@ -28,6 +32,8 @@ class Drink {
   editName() {
     document.getElementById(`drink-name-display-${this.id}`).innerHTML = `<h3 id="drink-name" data-id="${this.id}">${this.name}</h3>`
   }
+
+
 
   static deleteDrinkMemory(json) {
     Drink.all = Drink.all.filter(drink => drink.id !== json.id)

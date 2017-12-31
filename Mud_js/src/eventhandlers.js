@@ -30,7 +30,7 @@ function clearSpace(domElement) {
 }
 
 // refactor this below
-function showSpaceHandler(domWorkSpace, domShowSpace, ) {
+function showSpaceHandler(domWorkSpace, domShowSpace, domNameSpace ) {
   return event => {
     event.preventDefault();
     const id = parseInt(event.target.dataset.id)
@@ -54,6 +54,10 @@ function showSpaceHandler(domWorkSpace, domShowSpace, ) {
     }
   }
 }
+
+// function addDrinkDom() {
+//   [...document.getElementsByClassName('drink-name')].map(element => element.innerHTML +=(`<p>Hello</p>`))
+// }
 
 
 function newFormHandler(domWorkSpace, domShow) {
