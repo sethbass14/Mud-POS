@@ -76,9 +76,9 @@ function workSpaceHandler(domShow, workSpace, domDrinkNames, domOrderClients) {
     let model
     if (event.target.dataset.id === 'drink') {
       model = drinkFormHandler(domShow, domDrinkNames)
-      console.log(model)
     } else if (event.target.dataset.id === 'order') {
       model = orderFormHandler(domShow, domOrderClients)
+      // drinkOrderCheck()
     }
     if (event.target.type === 'submit') {
        clearSpace(workSpace)
@@ -87,6 +87,10 @@ function workSpaceHandler(domShow, workSpace, domDrinkNames, domOrderClients) {
     }
   }
 }
+
+// function drinkOrderHandler () {
+//
+// }
 
 
 function drinkFormHandler(domShow, domDrinkNames) {
@@ -112,8 +116,29 @@ function orderFormHandler(domShow, domOrderClients) {
     renderSpace(domOrderClients, order.renderName())
   } else if (event.target.id === 'submit-edit-order') {
     order = editOrder(client, date);
+    drinkOrderCheck();
   }
   return order
+}
+
+function drinkOrderCheck() {
+  const arr = [...document.getElementsByClassName('order-drink')]
+  const orderId = parseInt(document.getElementById('edit-order').dataset.id)
+  arr.forEach(element => {
+    if (parseInt(element.value) > 0) {
+      if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
+         const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
+         drinkOrder.quantity = parseInt(element.value)
+         debugger
+         DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
+        console.log(1)
+      } else {
+        const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: parseInt(element.dataset.id), quantity: parseInt(element.value)})
+        Order.getOrderById(orderId).drink_orders.push(newDrinkOrder)
+        DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder)
+      }
+    }
+  })
 }
 
 function setDataId(obj) {

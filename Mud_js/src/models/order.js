@@ -3,6 +3,7 @@ class Order {
     this.id = orderObj.id,
     this.client = orderObj.client,
     this.date = orderObj.date,
+    this.drink_ids = orderObj.drink_ids
     orderObj.drink_orders !== undefined ? this.drink_orders = orderObj.drink_orders.map(drinkOrderObj => new DrinkOrder(drinkOrderObj)) : null
     Order.all.push(this)
   }

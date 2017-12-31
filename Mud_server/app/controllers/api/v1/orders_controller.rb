@@ -21,7 +21,6 @@ class Api::V1::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    byebug
     if @order.update(order_params)
       render json: @order, status: 200
     else
