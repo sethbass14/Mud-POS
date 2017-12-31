@@ -13,11 +13,11 @@ class Drink {
   }
 
   renderNameOrder() {
-    return `<li>${this.name} | $${this.price} </li>`
+    return `<li data-id=${this.id}>${this.name} | $${this.price} </li>`
   }
 
   renderDrinkOrderDisplay() {
-    return `<label>${this.name} | $${this.price}</label><input type="text" data-id=${this.id} value="0"></input></br>`
+    return `<label>${this.name} | $${this.price}</label><input type="number" min="0" class="order-drink" data-id=${this.id} value="0"></input></br>`
   }
 
   renderAll() {

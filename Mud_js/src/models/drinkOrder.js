@@ -11,7 +11,6 @@ class DrinkOrder {
     return `<li>${Drink.getDrinkById(this.drink_id).name} | $${Drink.getDrinkById(this.drink_id).price} | order: ${this.quantity}</li>`
   }
 
-
 }
 
 DrinkOrder.all = []

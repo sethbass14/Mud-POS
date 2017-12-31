@@ -1,8 +1,13 @@
 class Api::V1::DrinkOrdersController < ApplicationController
 
   def index
-    @drink_orders = DrinkOrder.all
+    if params[:order_id]
+      @drink_orders = Order.find(params[:order_id]).drink_orders
+    else
+      @drink_orders = DrinkOrder.all
+    end
     render json: @drink_orders, status: 200
+
   end
 
   def show

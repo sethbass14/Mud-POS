@@ -2,9 +2,10 @@ function showList(obj, domElement) {
   domElement.innerHTML += obj.renderName()
 }
 
-function nameHandler(domElement) {
+function nameHandler(domElement, domWorkSpace) {
   return event => {
     event.preventDefault();
+    clearSpace(domWorkSpace)
     clearSpace(domElement)
     let string
     const id = parseInt(event.target.dataset.id)
@@ -46,6 +47,7 @@ function showSpaceHandler(domWorkSpace, domShowSpace, domNameSpace ) {
       case 'edit-order':
         clearSpace(domWorkSpace)
         renderSpace(domWorkSpace, Order.getOrderById(id).renderForm())
+        Order.getOrderById(id).setFormDrinkQuantityValue()
         break;
       case 'delete-order':
         clearSpace(domWorkSpace)
@@ -54,10 +56,6 @@ function showSpaceHandler(domWorkSpace, domShowSpace, domNameSpace ) {
     }
   }
 }
-
-// function addDrinkDom() {
-//   [...document.getElementsByClassName('drink-name')].map(element => element.innerHTML +=(`<p>Hello</p>`))
-// }
 
 
 function newFormHandler(domWorkSpace, domShow) {
