@@ -121,24 +121,45 @@ function orderFormHandler(domShow, domOrderClients) {
   return order
 }
 
+// function drinkOrderCheck() {
+//   const arr = [...document.getElementsByClassName('order-drink')]
+//   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
+//   arr.forEach(element => {
+//     if (parseInt(element.value) > 0) {
+//       if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
+//          const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
+//          drinkOrder.quantity = parseInt(element.value)
+//          debugger
+//          DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
+//       } else {
+//         const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: parseInt(element.dataset.id), quantity: parseInt(element.value)})
+//         Order.getOrderById(orderId).drink_orders.push(newDrinkOrder)
+//         DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder)
+//       }
+//     }
+//   })
+// }
+
 function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
   arr.forEach(element => {
-    if (parseInt(element.value) > 0) {
       if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
-         const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
+        const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
+        if (parseInt(element.value) > 0) {
          drinkOrder.quantity = parseInt(element.value)
-         debugger
          DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
-        console.log(1)
-      } else {
+       } else {
+         DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
+
+         Order.getOrderById(orderId).drink_orders = Order.getOrderById(orderId).drink_orders.filter(dO => dO.id !== drinkOrder.id )
+       }
+      } else if (parseInt(element.value) > 0) {
         const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: parseInt(element.dataset.id), quantity: parseInt(element.value)})
         Order.getOrderById(orderId).drink_orders.push(newDrinkOrder)
         DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder)
       }
-    }
-  })
+    })
 }
 
 function setDataId(obj) {
