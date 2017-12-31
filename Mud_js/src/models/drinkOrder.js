@@ -8,7 +8,7 @@ class DrinkOrder {
   }
 
   render() {
-    return `<li>${Drink.getDrinkById(this.drink_id).name} | $${Drink.getDrinkById(this.drink_id).price} | order: ${this.quantity}</li>`
+    return `<li data-id =${this.id}>${Drink.getDrinkById(this.drink_id).name} | $${Drink.getDrinkById(this.drink_id).price} | order: ${this.quantity}</li>`
   }
 
   static getDoByOrderIdDrinkId(order_id, drink_id) {

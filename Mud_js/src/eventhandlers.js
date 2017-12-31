@@ -144,22 +144,41 @@ function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
   arr.forEach(element => {
+      // debugger
       if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
         const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
-        if (parseInt(element.value) > 0) {
+        if (parseInt(element.value) > 0 && drinkOrder.quantity !== parseInt(element.value)) {
          drinkOrder.quantity = parseInt(element.value)
          DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
-       } else {
+       } else if (parseInt(element.value) === 0 ) {
+         console.log(drinkOrder)
          DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
 
          Order.getOrderById(orderId).drink_orders = Order.getOrderById(orderId).drink_orders.filter(dO => dO.id !== drinkOrder.id )
+         Order.getOrderById(orderId).drink_ids = Order.getOrderById(orderId).drink_ids.filter(id => id !== drinkOrder.drink_id)
        }
       } else if (parseInt(element.value) > 0) {
         const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: parseInt(element.dataset.id), quantity: parseInt(element.value)})
-        Order.getOrderById(orderId).drink_orders.push(newDrinkOrder)
-        DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder)
+        DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder).then(dO => {
+          console.log(dO)
+          setDataId(dO)
+          setDrinkOrderIdDom(orderId, dO)
+        })
+        Order.getOrderById(orderId).drink_orders.push(newDrinkOrder);
+        Order.getOrderById(orderId).drink_ids.push(parseInt(element.dataset.id))
+
       }
     })
+}
+
+function setDrinkOrderIdDom(order_id, drinkOrderObj) {
+  Order.getOrderById(order_id).drink_orders.map(dO => {
+    if (dO.id === undefined) {
+      console.log(dO)
+      console.log(drinkOrderObj)
+      dO.id = drinkOrderObj.id
+    }
+  })
 }
 
 function setDataId(obj) {

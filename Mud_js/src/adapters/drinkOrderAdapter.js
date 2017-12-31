@@ -1,6 +1,6 @@
 class DrinkOrderAdapter {
   static postNewDrinkOrder(drinkOrderObj) {
-    fetch('http://localhost:3000/api/v1/drink_orders', {
+    return fetch('http://localhost:3000/api/v1/drink_orders', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
