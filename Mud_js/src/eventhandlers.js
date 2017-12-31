@@ -2,9 +2,10 @@ function showList(obj, domElement) {
   domElement.innerHTML += obj.renderName()
 }
 
-function nameHandler(domElement) {
+function nameHandler(domElement, domWorkSpace) {
   return event => {
     event.preventDefault();
+    clearSpace(domWorkSpace)
     clearSpace(domElement)
     let string
     const id = parseInt(event.target.dataset.id)
@@ -23,6 +24,7 @@ function renderSpace(domElement, string) {
   domElement.innerHTML += string;
 }
 
+//Think about refactoring this to take an array and clear each one
 function clearSpace(domElement) {
   if (domElement.children.length > 1) {
     domElement.removeChild(domElement.children[1])
