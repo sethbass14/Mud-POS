@@ -121,35 +121,6 @@ function orderFormHandler(domShow, domOrderClients) {
   return order
 }
 
-
-//refactor all of this for sure
-// function drinkOrderCheck() {
-//   const arr = [...document.getElementsByClassName('order-drink')]
-//   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
-//   arr.forEach(element => {
-//       if (Order.getOrderById(orderId).drink_ids.includes(parseInt(element.dataset.id))) {
-//         const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, parseInt(element.dataset.id))
-//         if (parseInt(element.value) > 0 && drinkOrder.quantity !== parseInt(element.value)) {
-//          drinkOrder.quantity = parseInt(element.value)
-//          DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
-//        } else if (parseInt(element.value) === 0 ) {
-//          DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
-//          Order.getOrderById(orderId).drink_orders = Order.getOrderById(orderId).drink_orders.filter(dO => dO.id !== drinkOrder.id )
-//          Order.getOrderById(orderId).drink_ids = Order.getOrderById(orderId).drink_ids.filter(id => id !== drinkOrder.drink_id)
-//        }
-//       } else if (parseInt(element.value) > 0) {
-//         const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: parseInt(element.dataset.id), quantity: parseInt(element.value)})
-//         DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder).then(dO => {
-//           console.log(dO)
-//           setDataId(dO)
-//           setDrinkOrderIdDom(orderId, dO)
-//         })
-//         Order.getOrderById(orderId).drink_orders.push(newDrinkOrder);
-//         Order.getOrderById(orderId).drink_ids.push(parseInt(element.dataset.id))
-//
-//       }
-//     })
-// }
 function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
@@ -160,13 +131,9 @@ function drinkOrderCheck() {
       if (workOrder.drink_ids.includes(drinkId)) {
         const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, drinkId)
         if (drinkQuantity > 0 && drinkOrder.quantity !== drinkQuantity) {
-         drinkOrder.quantity = drinkQuantity
-         DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
+          updateDrinkOrderFront(drinkOrder, drinkQuantity)
        } else if (drinkQuantity === 0 ) {
          deleteDrinkOrderFront(drinkOrder, workOrder)
-        //  DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
-        //  workOrder.drink_orders = workOrder.drink_orders.filter(dO => dO.id !== drinkOrder.id )
-        //  workOrder.drink_ids = workOrder.drink_ids.filter(id => id !== drinkOrder.drink_id)
        }
      } else if (drinkQuantity > 0) {
         newDrinkOrder(orderId, drinkId, drinkQuantity, workOrder)
@@ -174,29 +141,6 @@ function drinkOrderCheck() {
     })
 }
 
-function deleteDrinkOrderFront(drinkOrderObj, orderObj) {
-  DrinkOrderAdapter.deleteDrinkOrder(drinkOrderObj).then(drinkOrderObj => DrinkOrder.deleteDrinkOrderMemory(drinkOrderObj))
-  orderObj.drink_orders = orderObj.drink_orders.filter(dO => dO.id !== drinkOrderObj.id )
-  orderObj.drink_ids = orderObj.drink_ids.filter(id => id !== drinkOrderObj.drink_id)
-}
-
-// function newDrinkOrder(orderId, drinkId, drinkQuantity, orderObj) {
-//   const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: drinkId, quantity: drinkQuantity})
-//   DrinkOrderAdapter.postNewDrinkOrder(newDrinkOrder).then(dO => {
-//     setDataId(dO)
-//     setDrinkOrderIdDom(orderId, dO)
-//   })
-//   orderObj.drink_orders.push(newDrinkOrder);
-//   orderObj.drink_ids.push(drinkId)
-// }
-
-// function setDrinkOrderIdDom(order_id, drinkOrderObj) {
-//   Order.getOrderById(order_id).drink_orders.map(dO => {
-//     if (dO.id === undefined) {
-//       dO.id = drinkOrderObj.id
-//     }
-//   })
-// }
 
 function setDataId(obj) {
   document.querySelectorAll('[data-id=undefined]').forEach(element => element.dataset.id = obj.id)

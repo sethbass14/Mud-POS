@@ -18,7 +18,6 @@ class Api::V1::DrinkOrdersController < ApplicationController
 
   def create
     @drink_order = DrinkOrder.new(drink_order_params)
-    byebug
     if @drink_order.save
       render json: @drink_order, status: 200
     else
@@ -38,7 +37,7 @@ class Api::V1::DrinkOrdersController < ApplicationController
 
   def destroy
     @drink_order = DrinkOrder.find(params[:id])
-    byebug
+    # byebug
     @drink_order.destroy
     render json: {message: "destroyed!", id: @drink_order.id}, status: 200
   end

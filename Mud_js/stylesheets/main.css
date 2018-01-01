@@ -4,6 +4,10 @@ body {
   color: #803E0D;
 }
 
+.image-container {
+  text-align: center;
+}
+
 h3:hover, #new-drink:hover, #new-order:hover {
   color: black;
   cursor: pointer
