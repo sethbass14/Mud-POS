@@ -78,20 +78,14 @@ function workSpaceHandler(domShow, workSpace, domDrinkNames, domOrderClients) {
       model = drinkFormHandler(domShow, domDrinkNames)
     } else if (event.target.dataset.id === 'order') {
       model = orderFormHandler(domShow, domOrderClients)
-      // drinkOrderCheck()
     }
     if (event.target.type === 'submit') {
        clearSpace(workSpace)
        clearSpace(domShow);
-
        renderSpace(domShow, model.renderAll())
     }
   }
 }
-
-// function drinkOrderHandler () {
-//
-// }
 
 
 function drinkFormHandler(domShow, domDrinkNames) {
@@ -122,6 +116,8 @@ function orderFormHandler(domShow, domOrderClients) {
   return order
 }
 
+
+//refactor all of this for sure
 function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
