@@ -17,6 +17,10 @@ class DrinkOrder {
     })[0]
   }
 
+  static deleteDrinkOrderMemory(json) {
+    DrinkOrder.all = DrinkOrder.all.filter(drinkOrder => drinkOrder.id !== json.id)
+  }
+
 }
 
 DrinkOrder.all = []
