@@ -19,6 +19,16 @@ function newDrinkOrder(orderId, drinkId, drinkQuantity, orderObj) {
   orderObj.drink_ids.push(drinkId)
 }
 
+//below is a bad problem. I should instantiate drink orders seperately from the order
+function deleteDrinkOrderFromDrinkDelete(id) {
+  const arr = DrinkOrder.all.filter(drinkOrder => drinkOrder.drink_id === id)
+  arr.map(drinkOrder => {
+    DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
+    DrinkOrder.all = DrinkOrder.all.filter(dO => dO.id !== drinkOrder.id)
+  })
+
+}
+
 function deleteDrinkOrderFront(drinkOrderObj, orderObj) {
   DrinkOrderAdapter.deleteDrinkOrder(drinkOrderObj).then(drinkOrderObj => DrinkOrder.deleteDrinkOrderMemory(drinkOrderObj))
   orderObj.drink_orders = orderObj.drink_orders.filter(dO => dO.id !== drinkOrderObj.id )

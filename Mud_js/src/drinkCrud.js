@@ -4,6 +4,7 @@ function deleteDrink(id, domShowSpace) {
     Drink.deleteDrinkMemory(resp);
     renderSpace(domShowSpace, `<div class="error"><p>${resp.message}</p></br><div class="image-container"><img class="drink-image" src="images/spilledcoffee_insta.jpg"></div></div>`);
   });
+  deleteDrinkOrderFromDrinkDelete(id);
   clearSpace(domShowSpace)
 }
 
@@ -15,8 +16,9 @@ function newDrink(name, description, price) {
   const newDrink = new Drink({name: name, description: description, price: price});
   DrinkAdapter.postNewDrink(newDrink).then(drinkObj => {
      setDataId(drinkObj);
-     setDrinkId(drinkObj)
-     new Drink(drinkObj),
+     setDrinkId(drinkObj);
+    //  Drink.all.find(drink => drink.id === undefined).id = drinkObj.id
+     new Drink(drinkObj);
      Drink.all = Drink.all.filter(drink => drink.id !== undefined)
   });
   return newDrink

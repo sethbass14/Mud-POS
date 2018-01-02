@@ -66,7 +66,8 @@ function drinkShowSpaceHandler(domWorkSpace, domShowSpace, domNamesSpace, id) {
 function newFormHandler(domWorkSpace, domShow) {
   return event => {
     event.preventDefault();
-    clearSpace(domWorkSpace)
+    clearSpace(domShow);
+    clearSpace(domWorkSpace);
     if (event.target.id === 'new-drink') {
         renderSpace(domWorkSpace, new Drink({}).renderForm())
         Drink.all = Drink.all.filter(drink => drink.id !== undefined)
