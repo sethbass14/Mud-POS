@@ -16,7 +16,8 @@ function newDrink(name, description, price) {
   DrinkAdapter.postNewDrink(newDrink).then(drinkObj => {
      setDataId(drinkObj);
      setDrinkId(drinkObj)
-     new Drink(drinkObj)
+     new Drink(drinkObj),
+     Drink.all = Drink.all.filter(drink => drink.id !== undefined)
   });
   return newDrink
 }

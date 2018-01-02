@@ -69,6 +69,7 @@ function newFormHandler(domWorkSpace, domShow) {
     clearSpace(domWorkSpace)
     if (event.target.id === 'new-drink') {
         renderSpace(domWorkSpace, new Drink({}).renderForm())
+        Drink.all = Drink.all.filter(drink => drink.id !== undefined)
     } else if (event.target.id === 'new-order') {
       renderSpace(domWorkSpace, new Order({}).renderForm())
     }
