@@ -1,10 +1,12 @@
 class Drink {
   constructor(drinkObj) {
+    // debugger
     this.id = drinkObj.id,
     this.name = drinkObj.name,
     this.description = drinkObj.description,
     this.price = drinkObj.price,
     this.orders = drinkObj.orders,
+    this.url = drinkObj.url,
     Drink.all.push(this)
   }
 
@@ -21,7 +23,7 @@ class Drink {
   }
 
   renderAll() {
-    return `<div id='drink-show'><ul class="show-list" id='drink-show-list'><li>${this.name}</li><li>${this.description}</li><li>$${this.price}</li></ul><button id='edit-drink' data-id="${this.id}">edit</button><button id='delete-drink' data-id="${this.id}">delete</button></div>`
+    return `<div id='drink-show'><ul class="show-list" id='drink-show-list'><li>${this.name}</li><li>${this.description}</li><li>$${this.price}</li></ul><button id='edit-drink' data-id="${this.id}">edit</button><button id='delete-drink' data-id="${this.id}">delete</button></br>${this.url ? `<div class="image-container"><img src=${this.url} class="drink-image"></div>`: ''}</div>`
   }
 
   renderForm() {

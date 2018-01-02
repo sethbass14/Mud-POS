@@ -2,7 +2,7 @@ function deleteDrink(id, domShowSpace) {
   document.getElementById(`drink-name-display-${parseInt(id)}`).remove()
   DrinkAdapter.deleteDrink(event.target.dataset.id).then(resp => {
     Drink.deleteDrinkMemory(resp);
-    renderSpace(domShowSpace, `<p>${resp.message}</p>`);
+    renderSpace(domShowSpace, `<div class="error"><p>${resp.message}</p></br><div class="image-container"><img class="drink-image" src="images/spilledcoffee_insta.jpg"></div></div>`);
   });
   clearSpace(domShowSpace)
 }

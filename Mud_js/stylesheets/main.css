@@ -8,6 +8,12 @@ body {
   text-align: center;
 }
 
+.drink-image {
+  height: 250px;
+  width: 250px;
+  border-radius: 25px;
+}
+
 h3:hover, #new-drink:hover, #new-order:hover {
   color: black;
   cursor: pointer
