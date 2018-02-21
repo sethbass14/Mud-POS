@@ -61,6 +61,13 @@ class Order {
   static deleteOrderMemory(json) {
     Order.all = Order.all.filter(order => order.id !== json.id)
   }
+
+  static deleteDrinkOrderMemory(drinkId) {
+    Order.all = Order.all.map(order => {
+      order.drink_orders = order.drink_orders.filter(drinkOrder => drinkOrder.drink_id !== drinkId)
+      return order
+    })
+  }
 }
 
 Order.all = []

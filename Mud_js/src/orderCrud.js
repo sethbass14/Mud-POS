@@ -1,5 +1,5 @@
 function setOrderId(orderObj) {
-  debugger
+  // debugger
   document.getElementById(`order-name-display-undefined`).id = `order-name-display-${orderObj.id}`
 }
 

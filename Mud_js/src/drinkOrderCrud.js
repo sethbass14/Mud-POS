@@ -21,11 +21,12 @@ function newDrinkOrder(orderId, drinkId, drinkQuantity, orderObj) {
 
 //below is a bad problem. I should instantiate drink orders seperately from the order
 function deleteDrinkOrderFromDrinkDelete(id) {
-  const arr = DrinkOrder.all.filter(drinkOrder => drinkOrder.drink_id === id)
-  arr.map(drinkOrder => {
-    DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
-    DrinkOrder.all = DrinkOrder.all.filter(dO => dO.id !== drinkOrder.id)
-  })
+  DrinkOrder.all = DrinkOrder.all.filter(drinkOrder => drinkOrder.drink_id === id)
+  Order.deleteDrinkOrderMemory(id)
+  // arr.map(drinkOrder => {
+    // DrinkOrderAdapter.deleteDrinkOrder(drinkOrder)
+  //   DrinkOrder.all = DrinkOrder.all.filter(dO => dO.id !== drinkOrder.id)
+  // })
 
 }
 

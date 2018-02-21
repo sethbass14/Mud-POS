@@ -63,12 +63,12 @@ class Api::V1::DrinkOrdersController < ApplicationController
   #   # end
   # end
 
-  # def destroy
-  #   @drink_order = DrinkOrder.find(params[:id])
-  #   # byebug
-  #   @drink_order.destroy
-  #   render json: {message: "destroyed!", id: @drink_order.id}, status: 200
-  # end
+  def destroy
+    @drink_order = DrinkOrder.find(params[:id])
+    # byebug
+    @drink_order.destroy
+    render json: {message: "destroyed!", id: @drink_order.id}, status: 200
+  end
 
   # private
 
