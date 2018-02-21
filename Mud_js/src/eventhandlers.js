@@ -118,7 +118,9 @@ function orderFormHandler(domShow, domOrderClients) {
     renderSpace(domOrderClients, order.renderName())
   } else if (event.target.id === 'submit-edit-order') {
     order = editOrder(client, date);
+    // debugger
     drinkOrderCheck();
+    // drinkOrderPost();
   }
   return order
 }
@@ -126,21 +128,44 @@ function orderFormHandler(domShow, domOrderClients) {
 function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
+  // debugger
   const workOrder = Order.getOrderById(orderId)
-  arr.forEach(element => {
-      const drinkId = parseInt(element.dataset.id)
-      const drinkQuantity = parseInt(element.value)
-      if (workOrder.drink_ids.includes(drinkId)) {
-        const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, drinkId)
-        if (drinkQuantity > 0 && drinkOrder.quantity !== drinkQuantity) {
-          updateDrinkOrderFront(drinkOrder, drinkQuantity)
-       } else if (drinkQuantity === 0 ) {
-         deleteDrinkOrderFront(drinkOrder, workOrder)
-       }
-     } else if (drinkQuantity > 0) {
-        newDrinkOrder(orderId, drinkId, drinkQuantity, workOrder)
-      }
-    })
+  //code below added 2/21/18
+  // const drinkOrderId = DrinkOrder.getDoByOrderIdDrinkId(orderId, drinkId).id
+  const postDrinkOrders = arr.map(drinkOrder => {
+    return {
+      drink_id: parseInt(drinkOrder.dataset.id),
+      quantity: parseInt(drinkOrder.value),
+      order_id: orderId
+    }
+  })
+
+  // debugger
+  console.log(postDrinkOrders)
+  DrinkOrderAdapter.postAllDrinkOrders({drink_orders: postDrinkOrders})
+  // arr.forEach(element => {
+  //     const drinkId = parseInt(element.dataset.id)
+  //     const drinkQuantity = parseInt(element.value)
+  //     if (workOrder.drink_ids.includes(drinkId)) {
+  //       const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, drinkId)
+  //       if (drinkQuantity > 0 && drinkOrder.quantity !== drinkQuantity) {
+  //         updateDrinkOrderFront(drinkOrder, drinkQuantity)
+  //      } else if (drinkQuantity === 0 ) {
+  //        deleteDrinkOrderFront(drinkOrder, workOrder)
+  //      }
+  //    } else if (drinkQuantity > 0) {
+  //       newDrinkOrder(orderId, drinkId, drinkQuantity, workOrder)
+  //     }
+  //   })
+}
+
+//This function added 2/21/18
+
+function drinkOrderPost() {
+  const arr = [...document.getElementsByClassName('order-drink')]
+  const orderId = parseInt(document.getElementById('edit-order').dataset.id)
+  debugger
+  DrinkOrder.postAllDrinkOrders(arr, orderId).then(console.log)
 }
 
 

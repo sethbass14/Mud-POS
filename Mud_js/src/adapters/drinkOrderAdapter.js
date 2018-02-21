@@ -26,4 +26,16 @@ class DrinkOrderAdapter {
       method:'DELETE'
     }).then(resp => resp.json())
   }
+
+  //Added this code 2/21/18
+  static postAllDrinkOrders(drinkOrders) {
+    return fetch(`http://localhost:3000/api/v1/drink_orders`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(drinkOrders)
+    }).then(resp => resp.json())
+  }
 }
