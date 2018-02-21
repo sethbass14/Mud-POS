@@ -26,7 +26,7 @@ class Api::V1::DrinkOrdersController < ApplicationController
       if drink
         if drink_order[:quantity] == 0
           drink.destroy
-          byebug
+          # byebug
         elsif drink_order[:quantity] != drink.quantity
           drink.quantity = drink_order[:quantity]
           drink.save
@@ -35,7 +35,8 @@ class Api::V1::DrinkOrdersController < ApplicationController
       end
 
       if !drink && drink_order[:quantity] > 0
-        DrinkOrder.create(drink_id: drink_order[:drink_id], order_id: drink_order[:order_id], quantity: drink_order[:quantity])
+        newDrinkOrder = DrinkOrder.create(drink_id: drink_order[:drink_id], order_id: drink_order[:order_id], quantity: drink_order[:quantity])
+        drink_response.push(newDrinkOrder)
       end
     end
     # @drink_order = DrinkOrder.new(drink_order_params)
@@ -44,7 +45,12 @@ class Api::V1::DrinkOrdersController < ApplicationController
     # else
     #   render json: {error: 'This screwed up!'}, status: 420
     # end
-    render json: {error: 'This screwed up!'}, status: 420
+    if !drink_response.empty?
+      render json: { drink_orders: drink_response }, status: 200
+    else
+      render json: { message: 'everything worked' }, status: 200
+    end
+
   end
 
   # def update

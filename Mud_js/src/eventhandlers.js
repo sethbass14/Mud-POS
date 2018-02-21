@@ -125,6 +125,8 @@ function orderFormHandler(domShow, domOrderClients) {
   return order
 }
 
+//This works! But it needs to be cleaned up and abstracted big time! Added 2/21/18
+
 function drinkOrderCheck() {
   const arr = [...document.getElementsByClassName('order-drink')]
   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
@@ -141,32 +143,40 @@ function drinkOrderCheck() {
   })
 
   // debugger
-  console.log(postDrinkOrders)
-  DrinkOrderAdapter.postAllDrinkOrders({drink_orders: postDrinkOrders})
-  // arr.forEach(element => {
-  //     const drinkId = parseInt(element.dataset.id)
-  //     const drinkQuantity = parseInt(element.value)
-  //     if (workOrder.drink_ids.includes(drinkId)) {
-  //       const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, drinkId)
-  //       if (drinkQuantity > 0 && drinkOrder.quantity !== drinkQuantity) {
-  //         updateDrinkOrderFront(drinkOrder, drinkQuantity)
-  //      } else if (drinkQuantity === 0 ) {
-  //        deleteDrinkOrderFront(drinkOrder, workOrder)
-  //      }
-  //    } else if (drinkQuantity > 0) {
-  //       newDrinkOrder(orderId, drinkId, drinkQuantity, workOrder)
-  //     }
-  //   })
+  DrinkOrderAdapter.postAllDrinkOrders({drink_orders: postDrinkOrders}).then(resp => {
+    if (resp.drink_orders) {
+      resp.drink_orders.forEach(drinkOrder => {
+        setDataId(drinkOrder)
+        setDrinkOrderIdDom(drinkOrder.order_id, drinkOrder.drink_id, drinkOrder)
+      })
+    }
+  })
+  arr.forEach(element => {
+      const drinkId = parseInt(element.dataset.id)
+      const drinkQuantity = parseInt(element.value)
+      if (workOrder.drink_ids.includes(drinkId)) {
+        const drinkOrder = DrinkOrder.getDoByOrderIdDrinkId(orderId, drinkId)
+        if (drinkQuantity > 0 && drinkOrder.quantity !== drinkQuantity) {
+          updateDrinkOrderFront(drinkOrder, drinkQuantity)
+       } else if (drinkQuantity === 0 ) {
+         deleteDrinkOrderFront(drinkOrder, workOrder)
+       }
+     } else if (drinkQuantity > 0) {
+       const newDrinkOrder = new DrinkOrder({order_id: orderId, drink_id: drinkId, quantity: drinkQuantity})
+       workOrder.drink_orders.push(newDrinkOrder);
+       workOrder.drink_ids.push(drinkId)
+      }
+  })
 }
 
 //This function added 2/21/18
 
-function drinkOrderPost() {
-  const arr = [...document.getElementsByClassName('order-drink')]
-  const orderId = parseInt(document.getElementById('edit-order').dataset.id)
-  debugger
-  DrinkOrder.postAllDrinkOrders(arr, orderId).then(console.log)
-}
+// function drinkOrderPost() {
+//   const arr = [...document.getElementsByClassName('order-drink')]
+//   const orderId = parseInt(document.getElementById('edit-order').dataset.id)
+//   debugger
+//   DrinkOrder.postAllDrinkOrders(arr, orderId).then(console.log)
+// }
 
 
 function setDataId(obj) {

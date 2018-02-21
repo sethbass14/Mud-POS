@@ -29,13 +29,17 @@ function deleteDrinkOrderFromDrinkDelete(id) {
 
 }
 
+//edited on 2/21/18
+
 function deleteDrinkOrderFront(drinkOrderObj, orderObj) {
-  DrinkOrderAdapter.deleteDrinkOrder(drinkOrderObj).then(drinkOrderObj => DrinkOrder.deleteDrinkOrderMemory(drinkOrderObj))
+  // DrinkOrderAdapter.deleteDrinkOrder(drinkOrderObj).then(drinkOrderObj => DrinkOrder.deleteDrinkOrderMemory(drinkOrderObj))
+  DrinkOrder.deleteDrinkOrderMemory(drinkOrderObj)
   orderObj.drink_orders = orderObj.drink_orders.filter(dO => dO.id !== drinkOrderObj.id )
   orderObj.drink_ids = orderObj.drink_ids.filter(id => id !== drinkOrderObj.drink_id)
 }
 
+//edited on 2/21/18
 function updateDrinkOrderFront(drinkOrder, drinkQuantity) {
-  drinkOrder.quantity = drinkQuantity,
-  DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
+  drinkOrder.quantity = drinkQuantity
+  // DrinkOrderAdapter.updateDrinkOrder(drinkOrder)
 }
