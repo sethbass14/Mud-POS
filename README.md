@@ -1,5 +1,8 @@
 # Mud-POS
 ### A point of service web-based javaScript app named after my favorite NYC Coffee Shop, Mud. The app creates orders, edits orders, and keeps track of order totals. 
+
+Link to demo: https://youtu.be/99gDtELcVHE
+
 ## Getting Started
 1. Fork and Clone this repo.
 2. Both the frontend and the backend are contained in this repo. 
