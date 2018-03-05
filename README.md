@@ -9,8 +9,10 @@ Link to demo: https://youtu.be/99gDtELcVHE
 3. Change Directories to /Mud_server
 4. Run Bundle Install
 ```bundle install```
-5. Type `rails s` to run the server
-6. Change directories to /Mud_js and type `open index.html` in the command line to view the DOM in your browser. 
+5. Run `rails db:create` to create database
+6. Run `rails db:migrate` to run migrations
+7. Type `rails s` to run the server
+8. Change directories to /Mud_js and type `open index.html` in the command line to view the DOM in your browser. 
 ## Built With
 * Ruby on Rails
 * JavaScript
